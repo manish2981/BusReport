@@ -19,7 +19,7 @@
     <tr>
         <td colspan="3">
             <div class="p-p-3">
-                <p-table [value]="report.busData" dataKey="busId" [reorderableColumns]="true">
+                <p-table [value]="report.busData" dataKey="busId" [redetailsableColumns]="true">
                     <ng-template pTemplate="header" >
                         <tr>
                             <th pSortableColumn="busId">Bus ID <p-sortIcon field="busId"></p-sortIcon></th>
@@ -27,25 +27,25 @@
                             <th pSortableColumn="deviationFromTimetable">Status <p-sortIcon field="deviationFromTimetable"></p-sortIcon></th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-order>
+                    <ng-template pTemplate="body" let-details>
                         <tr>
-                            <td>{{order.busId}}</td>
+                            <td>{{details.busId}}</td>
                             <td>
-                              <div *ngIf ="order.routeVariant != 'UNKNOWN'; else elseBlock">
+                              <div *ngIf ="details.routeVariant != 'UNKNOWN'; else elseBlock">
                                 <span  style="font-weight: bold;">
-                                  {{order.routeVariant | slice:0:3}}
+                                  {{details.routeVariant | slice:0:3}}
                                 </span>
                                 <span>
-                                  {{order.routeVariant | slice:3:order.routeVariant.length}}
+                                  {{details.routeVariant | slice:3:details.routeVariant.length}}
                                 </span>
                               </div>
-                              <ng-template #elseBlock>{{order.routeVariant}}</ng-template>
+                              <ng-template #elseBlock>{{details.routeVariant}}</ng-template>
                             </td>
                             <td>
-                              <span  [ngClass]="renderStatusClass(order.deviationFromTimetable)">
-                                 {{order.deviationFromTimetable<0 ? 'Late' : 
-                                  order.deviationFromTimetable>0 && order.deviationFromTimetable < 300 ? 'On Time' :
-                                  order.deviationFromTimetable > 300 ? 'Early' : 
+                              <span  [ngClass]="renderStatusClass(details.deviationFromTimetable)">
+                                 {{details.deviationFromTimetable<0 ? 'Late' : 
+                                  details.deviationFromTimetable>0 && details.deviationFromTimetable < 300 ? 'On Time' :
+                                  details.deviationFromTimetable > 300 ? 'Early' : 
                                   'Unknown' }}
                                 </span>
                             </td>
