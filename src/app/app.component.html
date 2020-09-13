@@ -12,7 +12,7 @@
 </ng-template>
 <ng-template pTemplate="emptymessage">
   <tr>
-      <td colspan="3">Current Bus Report does not exist</td>
+      <td colspan="3">No data exist for current Bus Report</td>
   </tr>
 </ng-template>
 <ng-template pTemplate="rowexpansion" let-report>
@@ -53,7 +53,7 @@
                     </ng-template>
                     <ng-template pTemplate="emptymessage">
                         <tr>
-                            <td colspan="3">No data exist for {{product.organisation}}</td>
+                            <td colspan="3">No data exist for {{report.organisation}}</td>
                         </tr>
                     </ng-template>
                 </p-table>
