@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
+import { BusReportService } from './services/BusReport.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,9 +16,10 @@ import {TableModule} from 'primeng/table';
     BrowserModule,
     AppRoutingModule,
     ButtonModule,
-    TableModule
+    TableModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [BusReportService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

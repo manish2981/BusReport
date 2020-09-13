@@ -1,2 +1,75 @@
-
-<router-outlet></router-outlet>
+<div style="font-family: Arial, Helvetica, sans-serif;">
+  <h1>Bus Reports</h1>
+</div>
+<p-table [value]="reports" dataKey="organisation">
+<ng-template pTemplate="body" let-report let-expanded="expanded">
+    <tr>
+        <td colspan="2">{{report.organisation}} - {{report.date}}</td>
+        <td colspan="1">
+          <button type="button" pButton [pRowToggler]="report" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+      </td>
+    </tr>
+</ng-template>
+<ng-template pTemplate="emptymessage">
+  <tr>
+      <td colspan="3">Current Bus Report does not exist</td>
+  </tr>
+</ng-template>
+<ng-template pTemplate="rowexpansion" let-report>
+    <tr>
+        <td colspan="3">
+            <div class="p-p-3">
+                <p-table [value]="report.busData" dataKey="busId" [reorderableColumns]="true">
+                    <ng-template pTemplate="header" >
+                        <tr>
+                            <th pSortableColumn="busId">Bus ID <p-sortIcon field="busId"></p-sortIcon></th>
+                            <th pSortableColumn="routeVariant">Route Variant <p-sortIcon field="routeVariant"></p-sortIcon></th>
+                            <th pSortableColumn="deviationFromTimetable">Status <p-sortIcon field="deviationFromTimetable"></p-sortIcon></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-order>
+                        <tr>
+                            <td>{{order.busId}}</td>
+                            <td>
+                              <div *ngIf ="order.routeVariant != 'UNKNOWN'; else elseBlock">
+                                <span  style="font-weight: bold;">
+                                  {{order.routeVariant | slice:0:3}}
+                                </span>
+                                <span>
+                                  {{order.routeVariant | slice:3:order.routeVariant.length}}
+                                </span>
+                              </div>
+                              <ng-template #elseBlock>{{order.routeVariant}}</ng-template>
+                            </td>
+                            <td>
+                              <span  [ngClass]="renderStatusClass(order.deviationFromTimetable)">
+                                 {{order.deviationFromTimetable<0 ? 'Late' : 
+                                  order.deviationFromTimetable>0 && order.deviationFromTimetable < 300 ? 'On Time' :
+                                  order.deviationFromTimetable > 300 ? 'Early' : 
+                                  'Unknown' }}
+                                </span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="3">No data exist for {{product.organisation}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </td>
+    </tr>
+  <tr>
+    <td>
+      <span class="p-float-label"> 
+        <textarea id="float-input" rows="5" cols="100" pInputTextarea></textarea>
+        <label for="float-input">Enter notes here</label>
+      </span>
+      <span>
+        <p-button label="Save Notes"></p-button>
+      </span>
+    </td>
+  </tr>
+</ng-template>
+</p-table>

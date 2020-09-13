@@ -8,7 +8,7 @@ export class BusReportService {
    
     constructor(private http: HttpClient) { }
 
-    getProductsWithOrdersSmall() {
+    getReport() {
         return this.http.get<any>('assets/bus-services-data.json')
         .toPromise()
         .then(res => <Report[]>res.data)
