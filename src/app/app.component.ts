@@ -30,12 +30,12 @@ export class AppComponent {
       this.busReportService.getReport().then(data => this.reports = data);
   }
 
-  renderStatusClass(v1:number){
-      if(v1<0){
+  renderStatusClass(deviationFromTimetable:number){
+      if(deviationFromTimetable<0){
           return "p-tag p-tag-rounded p-tag-danger";
-      } else if(v1>0 && v1<300){
+      } else if(deviationFromTimetable>0 && deviationFromTimetable<300){
         return "p-tag p-tag-rounded p-tag-success";
-      } else if (v1>300){
+      } else if (deviationFromTimetable>300){
         return "p-tag p-tag-rounded p-tag-primary";
       } else{
         return "p-tag p-tag-rounded p-tag-warning";
